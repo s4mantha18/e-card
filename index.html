@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday Mom!</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #ffe6f0, #e6f7ff);
+        font-family: poppins, sans-serif;
+        overflow: hidden;
+      }
+      .book {
+        display: flex;
+        width: 80%;
+        max-width: 1000px;
+        height: 70vh;
+        background: linear-gradient(145deg, #935fa7, #ff66b2);
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        position: relative;
+        z-index: 2;
+
+        /* FRAME */
+        border: 8px solid #fff; /* outer frame */
+        outline: 4px solid #935fa7; /* second frame */
+      }
+      .page {
+        flex: 1;
+        padding: 30px;
+        box-sizing: border-box;
+      }
+
+      .left-page {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        overflow-y: auto;
+        background-color: white;
+      }
+      .left-page img:first-child {
+        grid-column: 1 / -1;
+        height: 200px; /* banner height */
+        object-fit: cover;
+      }
+
+      .left-page img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+      }
+
+      .left-page img:hover {
+        transform: scale(1.05) rotate(-2deg);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      }
+      .right-page {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+      h1 {
+        font-size: 2.5rem;
+        color: #481830;
+        margin: 0 0 10px;
+      }
+      p {
+        font-size: 1.2rem;
+        color: #333;
+        margin-bottom: 15px;
+      }
+      button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background: #1f011f;
+        border: none;
+        border-radius: 10px;
+        font-size: 1rem;
+        cursor: pointer;
+        color: white;
+        transition: background 0.3s;
+        font-family: poppins, sans-serif;
+        width: 350px;
+      }
+      button:hover {
+        background: #481830;
+      }
+      .confetti {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background: red;
+        top: -10px;
+        opacity: 0.8;
+        animation: fall 3s linear forwards;
+      }
+
+      .left-page::-webkit-scrollbar {
+        width: 8px;
+      }
+      .left-page::-webkit-scrollbar-track {
+        background: #f0f0f0;
+        border-radius: 10px;
+      }
+      .left-page::-webkit-scrollbar-thumb {
+        background: #ff99cc;
+        border-radius: 10px;
+      }
+      .left-page::-webkit-scrollbar-thumb:hover {
+        background: #ff66b2;
+      }
+      @keyframes fall {
+        to {
+          transform: translateY(100vh) rotate(360deg);
+        }
+      }
+      .balloon {
+        position: absolute;
+        bottom: -150px;
+        width: 60px;
+        height: 80px;
+        background: red;
+        border-radius: 50% 50% 50% 50%;
+        opacity: 0.8;
+        animation: rise 10s linear infinite;
+      }
+      .balloon::after {
+        content: "";
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        width: 2px;
+        height: 20px;
+        background: #555;
+      }
+      @keyframes rise {
+        0% {
+          transform: translateY(0) translateX(0);
+        }
+        100% {
+          transform: translateY(-120vh) translateX(20px);
+        }
+      }
+      iframe {
+        margin-top: 20px;
+        border-radius: 12px;
+        width: 100%;
+        max-width: 300px;
+        height: 80px;
+      }
+
+      /* ---------- Tablets (portrait & small laptops) ---------- */
+      @media (max-width: 1024px) {
+        .book {
+          width: 90%;
+          height: 65vh;
+        }
+        h1 {
+          font-size: 2rem;
+        }
+        p {
+          font-size: 1.1rem;
+        }
+        button {
+          width: 280px;
+          font-size: 0.95rem;
+        }
+      }
+
+      /* ---------- Large Phones / Small Tablets ---------- */
+      @media (max-width: 768px) {
+        .book {
+          flex-direction: column; /* stack pages vertically */
+          height: auto;
+          max-height: none;
+        }
+        .page {
+          padding: 20px;
+        }
+        .left-page {
+          grid-template-columns: repeat(2, 1fr);
+          max-height: 300px; /* limit scroll height */
+        }
+        h1 {
+          font-size: 1.8rem;
+        }
+        button {
+          width: 220px;
+        }
+        iframe {
+          max-width: 260px;
+          height: 70px;
+        }
+      }
+
+      /* ---------- Small Phones ---------- */
+      @media (max-width: 480px) {
+        body {
+          padding: 10px;
+        }
+        .book {
+          width: 100%;
+          border-width: 5px;
+          outline-width: 3px;
+        }
+        .left-page {
+          grid-template-columns: 1fr; /* single column images */
+          gap: 8px;
+        }
+        .left-page img:first-child {
+          height: 150px;
+        }
+        h1 {
+          font-size: 1.6rem;
+        }
+        p {
+          font-size: 1rem;
+        }
+        button {
+          width: 180px;
+          font-size: 0.9rem;
+        }
+        iframe {
+          width: 50%;
+          height: 60px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="book">
+      <div class="page left-page">
+        <img src="img/14th Sept. 1978.png" alt="Mom Photo 7" />
+        <img
+          src="img/469595184_10235077346412455_4912432388194756485_n.jpg"
+          alt=""
+        />
+        <img
+          src="img/471680954_10235233126106850_2713970153177293729_n.jpg"
+          alt=""
+        />
+        <img
+          src="img/472010715_10235242145612332_8528345784222223840_n.jpg"
+          alt=""
+        />
+        <img
+          src="img/474088128_10235347954897498_3057469001229083130_n.jpg"
+          alt=""
+        />
+        <img
+          src="img/488064374_10236051395243067_8663283611325252289_n.jpg"
+          alt=""
+        />
+        <img
+          src="img/506532938_10237074847788741_5708681079051943813_n.jpg"
+          alt=""
+        />
+        <img src="img/bukky 2.jpg" alt="Mom Photo 1" />
+        <img src="img/bukky 3.jpg" alt="Mom Photo 2" />
+        <img src="img/bukkky 4.jpg" alt="Mom Photo 3" />
+        <img src="img/bukky 5.jpg" alt="Mom Photo 4" />
+        <img src="img/bukky 6.jpg" alt="Mom Photo 5" />
+        <img src="img/founder.webp" alt="Mom Photo 6" />
+      </div>
+      <div class="page right-page">
+        <h1>🎉 Happy Birthday Mom! 🎂</h1>
+        <p>Wishing you the sweetest day filled with love and smiles 💖</p>
+        <button onclick="startConfetti()">TAP ME!!! 🎊</button>
+        <iframe
+          data-testid="embed-iframe"
+          style="border-radius: 12px"
+          src="https://open.spotify.com/embed/track/66CFVGz5TW0FtoHhdGulzV?utm_source=generator"
+          width="100%"
+          height="352"
+          frameborder="0"
+          allowfullscreen=""
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+
+    <script>
+      function startConfetti() {
+        for (let i = 0; i < 50; i++) {
+          let confetti = document.createElement("div");
+          confetti.classList.add("confetti");
+          document.body.appendChild(confetti);
+
+          let colors = ["#ff6666", "#ffcc66", "#66ff66", "#66ccff", "#cc66ff"];
+          confetti.style.background =
+            colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.left = Math.random() * window.innerWidth + "px";
+          confetti.style.animationDuration = 2 + Math.random() * 3 + "s";
+
+          setTimeout(() => confetti.remove(), 5000);
+        }
+      }
+
+      function createBalloons() {
+        for (let i = 0; i < 10; i++) {
+          let balloon = document.createElement("div");
+          balloon.classList.add("balloon");
+          document.body.appendChild(balloon);
+
+          let colors = ["#ff6666", "#ffcc66", "#66ff66", "#66ccff", "#cc66ff"];
+          balloon.style.background =
+            colors[Math.floor(Math.random() * colors.length)];
+          balloon.style.left = Math.random() * window.innerWidth + "px";
+          balloon.style.animationDuration = 6 + Math.random() * 5 + "s";
+
+          setTimeout(() => balloon.remove(), 12000);
+        }
+      }
+
+      setInterval(createBalloons, 3000);
+    </script>
+  </body>
+</html>
